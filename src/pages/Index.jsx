@@ -1,19 +1,42 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
-
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+import { Box, Flex, Text, VStack, Input, Button, Switch, FormControl, FormLabel, useBreakpointValue } from "@chakra-ui/react";
 
 const Index = () => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
-      </VStack>
-    </Container>
+    <Flex height="100vh" direction={isMobile ? "column" : "row"} overflow="hidden">
+      <Flex flex={1} bg="blue.50" p={4} direction="column" overflowY="auto">
+        <VStack spacing={4}>
+          <Text fontSize="2xl" fontWeight="bold">Messages</Text>
+          <Flex direction="column" width="100%">
+            <Input placeholder="Search messages" mb={4} />
+            <Flex direction="column" flex="1" overflowY="auto">
+              {/* Example messages */}
+              <Text bg="gray.100" p={2} borderRadius="md" mb={2}>Hello! How are you?</Text>
+              <Text bg="gray.100" p={2} borderRadius="md" mb={2}>This is a test message.</Text>
+            </Flex>
+          </Flex>
+        </VStack>
+      </Flex>
+      <Flex flex={1} bg="green.50" p={4} direction="column" overflowY="auto">
+        <VStack spacing={4}>
+          <Text fontSize="2xl" fontWeight="bold">Privacy Settings</Text>
+          <FormControl display="flex" alignItems="center">
+            <FormLabel htmlFor="email-alerts" mb="0">
+              Email Alerts
+            </FormLabel>
+            <Switch id="email-alerts" />
+          </FormControl>
+          <FormControl display="flex" alignItems="center">
+            <FormLabel htmlFor="sms-notifications" mb="0">
+              SMS Notifications
+            </FormLabel>
+            <Switch id="sms-notifications" />
+          </FormControl>
+          <Button colorScheme="blue">Save Settings</Button>
+        </VStack>
+      </Flex>
+    </Flex>
   );
 };
 
